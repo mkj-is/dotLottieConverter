@@ -3,31 +3,45 @@ import ArgumentParser
 import Foundation
 
 private enum ConverterError: Error {
-    case fileNotDecoded(file: String)
+    case fileNotDecoded(url: URL)
 }
 
 @main
 struct Converter: AsyncParsableCommand {
-    @Argument(help: "List of Lottie JSON files to be converted to .lottie")
-    private var files: [String]
+    static let configuration: CommandConfiguration = CommandConfiguration(
+        abstract: "dotLottie converter is a command-line tool that converts Lottie JSON files to dotLottie files using the dotLottieLoader library.",
+        usage: "dotLottieConverter <lottie files – lottiefiles/*.json> --output <output folder>] [--verbose]"
+    )
 
-    @Option(help: "Output folder")
-    private var output: String?
+    @Argument(
+        help: "List of Lottie JSON files to be converted to dotLottie.",
+        transform: URL.init(fileURLWithPath:)
+    )
+    private var files: [URL]
 
-    @Flag
+    @Option(help: ArgumentHelp(
+        "Output folder",
+        discussion: "Will be created in case it does not exist. If not provided files will be saved to temp folder."
+    ), transform: URL.init(fileURLWithPath:))
+    private var output: URL?
+
+    @Flag(help: "Will print paths to all created dotLottie files.")
     private var verbose: Bool = false
 
     func run() async throws {
-        let outputFolder = output.flatMap { URL(fileURLWithPath: $0, isDirectory: true) }
         for file in files {
-            let url = URL(fileURLWithPath: file)
-            let result = await DotLottieCreator(animationUrl: url).create()
+            let result = await DotLottieCreator(animationUrl: file).create()
             guard let result else {
-                throw ConverterError.fileNotDecoded(file: file)
+                throw ConverterError.fileNotDecoded(url: file)
             }
 
-            if let outputFolder {
-                let destinationURL = outputFolder.appendingPathComponent(result.lastPathComponent)
+            if let output {
+                let fileManager: FileManager = .default
+                let destinationURL = output.appendingPathComponent(result.lastPathComponent)
+
+                if !fileManager.fileExists(atPath: output.path(percentEncoded: false)) {
+                    try FileManager.default.createDirectory(at: output, withIntermediateDirectories: true, attributes: nil)
+                }
                 try FileManager.default.moveItem(at: result, to: destinationURL)
                 if verbose {
                     print(destinationURL)
