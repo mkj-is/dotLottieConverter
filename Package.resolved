@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "dotlottieloader-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dotlottie/dotLottieLoader-ios.git",
+      "state" : {
+        "revision" : "1309cf813114bf84e9430c1a08aba11bc3bdaaad",
+        "version" : "0.2.0"
+      }
+    },
+    {
+      "identity" : "zip",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/LottieFiles/Zip.git",
+      "state" : {
+        "revision" : "e16ccb1e0e772b280a2e177e2b6d4d99dd8f9419",
+        "version" : "2.1.2"
+      }
+    }
+  ],
+  "version" : 2
+}
