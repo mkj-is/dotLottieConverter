@@ -5,19 +5,21 @@ import PackageDescription
 
 let package = Package(
     name: "dotLottieConverter",
-    platforms: [.macOS(.v10_15)],
+    platforms: [.macOS(.v13)],
     products: [
-        .library(
+        .executable(
             name: "dotLottieConverter",
             targets: ["dotLottieConverter"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/dotlottie/dotLottieLoader-ios.git", from: "0.2.0")
+        .package(url: "https://github.com/apple/swift-argument-parser", from: "1.2.0"),
+        .package(url: "https://github.com/dotlottie/dotLottieLoader-ios.git", from: "0.2.0"),
     ],
     targets: [
-        .target(
+        .executableTarget(
             name: "dotLottieConverter",
             dependencies: [
+                .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "dotLottieLoader", package: "dotLottieLoader-ios")
             ]),
         .testTarget(
