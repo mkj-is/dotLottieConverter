@@ -16,7 +16,7 @@ To use dotLottie converter, run the following command in the terminal:
 /path/to/dotLottieConverter <lottie files> [--output <output folder>] [--verbose]
 ```
 
-### Arguments
+### Arguments
 
 - `<lottie files>`: A space-separated list of Lottie JSON files to be converted to dotLottie.
 - `--output <output folder>` (optional): The folder where the converted dotLottie files will be saved.
