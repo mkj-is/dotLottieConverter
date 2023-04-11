@@ -40,13 +40,13 @@ struct Converter: AsyncParsableCommand {
             var creator = DotLottieCreator(animationUrl: file)
             creator.loop = !noLoop
             creator.themeColor = color
-            if let output {
+            if let output = output {
                 creator.directory = output
             }
 
             let result = await creator.create()
 
-            guard let result else {
+            guard let result = result else {
                 throw ConverterError.fileNotDecoded(url: file)
             }
 
