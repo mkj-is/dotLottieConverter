@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/dotlottie/dotLottieLoader-ios.git",
       "state" : {
-        "revision" : "1309cf813114bf84e9430c1a08aba11bc3bdaaad",
-        "version" : "0.2.0"
+        "revision" : "deced893b214d4ab9e83e181b05c18a911bbe606",
+        "version" : "0.2.1"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-argument-parser",
       "state" : {
-        "revision" : "fee6933f37fde9a5e12a1e4aeaa93fe60116ff2a",
-        "version" : "1.2.2"
+        "revision" : "cdd0ef3755280949551dc26dee5de9ddeda89f54",
+        "version" : "1.6.2"
       }
     },
     {
